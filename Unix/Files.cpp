@@ -1,8 +1,10 @@
 #if defined(linux) || defined(__linux)
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <cstring>
 #include <cstddef>
-#include <sys/types.h>
 #include <dirent.h>
 #include "Files.hpp"
 
