@@ -41,4 +41,12 @@ bool	Files::close(void *dir)
   return (closed);
 }
 
+bool    Files::isFile(const char *filename)
+{
+  struct stat buff;
+
+  stat(filename, &buff);
+  return (S_ISREG(buff.st_mode));
+}
+
 #endif
