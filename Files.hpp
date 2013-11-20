@@ -4,8 +4,8 @@
 class Files
 {
 public:
-  static void		*open(const char *);
-  static const char	*next(void *);
+  static void		*first(const char *, char **);
+  static char		*next(void *);
   static bool		close(void *);
 };
 

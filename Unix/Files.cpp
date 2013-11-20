@@ -6,15 +6,21 @@
 #include <dirent.h>
 #include "Files.hpp"
 
-void	*Files::open(const char *dirname)
+void	*Files::first(const char *dirname, char **filename)
 {
   void	*dir = NULL;
+  void	*handle = NULL;
 
-  dir = (void *) opendir(dirname);
+  if (!(dir = (void *) opendir(dirname)) || !(handle = readdir((DIR *)dir)))
+    return (NULL);
+  if (((struct dirent *)handle)->d_type != DT_REG)
+    return (Files::next(dir));
+  *filename = new char[256];
+  memcpy(*filename, ((struct dirent *)handle)->d_name, 256);
   return (dir);
 }
 
-const char *Files::next(void *dir)
+char *Files::next(void *dir)
 {
   char	*filename = new char[256];
   void		*handle = NULL;

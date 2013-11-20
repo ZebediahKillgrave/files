@@ -3,12 +3,14 @@
 
 int main(void)
 {
-  void	*dir;
-  const char *file;
+  void	*dir = NULL;
+  char *file = NULL;
 
-  dir = Files::open(".");
+  if (!(dir = Files::first("aze", &file)))
+    return (0);
+  std::cout << "first : " << file << std::endl;
   while (file = Files::next(dir))
-    std::cout << file << std::endl;
+    std::cout << "next : " << file << std::endl;
   Files::close(dir);
   return (0);
 }
