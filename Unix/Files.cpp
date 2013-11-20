@@ -13,8 +13,6 @@ void	*Files::first(const char *dirname, char **filename)
 
   if (!(dir = (void *) opendir(dirname)) || !(handle = readdir((DIR *)dir)))
     return (NULL);
-  if (((struct dirent *)handle)->d_type != DT_REG)
-    return (Files::next(dir));
   *filename = new char[256];
   memcpy(*filename, ((struct dirent *)handle)->d_name, 256);
   return (dir);
@@ -27,8 +25,6 @@ char *Files::next(void *dir)
 
   if (!(handle = readdir((DIR *)dir)))
     return (NULL);
-  if (((struct dirent *)handle)->d_type != DT_REG)
-    return (Files::next(dir));
   memcpy(filename, ((struct dirent *)handle)->d_name, 256);
   return (filename);
 }
